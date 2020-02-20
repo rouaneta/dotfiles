@@ -1,0 +1,48 @@
+#VS code
+alias c="code ."
+alias cr="code . -r"
+
+# Get External IP / local IPs
+alias ip="curl ipinfo.io/ip"
+alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
+alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
+
+# Quickly serve the current directory as HTTP
+alias serve='ruby -run -e httpd . -p 8000'  # Or python -m SimpleHTTPServer :)
+
+# Heroku
+alias hl="heroku local"
+
+# Docker
+alias dr="docker run"
+alias dc="docker-compose"
+alias dcu="docker-compose up"
+
+# Hub
+alias hb="hub browse"
+alias hpr="hub pull-request"
+alias hprs="hub pr show"
+
+# Current projects
+alias hube='cd ~/code/projects/hub'
+alias chube='code ~/code/projects/hub'
+alias alph='cd ~/code/projects/alphonse'
+alias calph='code ~/code/projects/alphonse'
+alias nest='cd ~/code/projects/nestor'
+alias cnest='code ~/code/projects/nestor'
+alias marv='cd ~/code/projects/marvin'
+alias cmarv='code ~/code/projects/marvin'
+
+# Common aliases
+alias be='bundle exec'
+alias bg="bundle exec guard"
+alias bi='bundle install'
+alias bu='bundle update'
+
+# Rails
+alias ss="spring stop"
+alias rdc="bundle exec rake db:create"
+alias rdm="bundle exec rake db:migrate"
+alias rdtp="bundle exec rake db:test:prepare"
+alias mig="bundle exec rake db:migrate && bundle exec rake db:test:prepare"
+alias now="git pull --rebase && bundle install && bundle exec rake db:migrate && bundle exec rake db:test:prepare && git stash"
