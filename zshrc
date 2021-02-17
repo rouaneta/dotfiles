@@ -4,7 +4,7 @@ ZSH=$HOME/.oh-my-zsh
 #   https://github.com/robbyrussell/oh-my-zsh/wiki/themes
 ZSH_THEME="robbyrussell"
 
-# Useful plugins for Rails development with Sublime Text
+# Useful plugins for Rails development
 plugins=(git git-patch gitfast last-working-dir common-aliases zsh-syntax-highlighting history-substring-search)
 
 # Prevent Homebrew from reporting - https://github.com/Homebrew/brew/blob/master/share/doc/homebrew/Analytics.md
@@ -38,3 +38,53 @@ export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH=/Users/arthurrouanet/bin:$PATH
+
+# FZF
+export FZF_DEFAULT_OPTS="--exact --height 80% --reverse"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Load Git completion
+zstyle ':completion:*:*:git:*' script /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
+fpath=(~/.zsh $fpath)
+
+autoload -Uz compinit && compinit
+
+# fbr - checkout git branch, sorted by most recent commit, limit 30 occurences
+fbr() {
+  local branches
+  local num_branches
+  local branch
+  local target
+
+  branches="$(
+    git for-each-ref \
+      --count=30 \
+      --sort=-committerdate \
+      refs/heads/ \
+      --format='%(refname:short)'
+  )" || return
+
+  branch="$(
+    echo "$branches" \
+      | fzf-tmux +m
+  )" || return
+
+  target="$(
+    echo "$branch" \
+      | sed "s/.* //" \
+      | sed "s#remotes/[^/]*/##"
+  )" || return
+
+  git checkout "$target"
+}
+
+# beautiful diff with fzf
+function gdd() {
+  preview="git diff $@ --color=always -- {-1}"
+  git diff $@ --name-only | fzf -m --ansi --preview $preview
+}
+
+# export PATH="/usr/local/bin/rubocop-daemon-wrapper:$PATH"
+# export RUBOCOP_DAEMON_USE_BUNDLER=true

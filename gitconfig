@@ -15,11 +15,7 @@
 	# editor = '/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code' -n -w
 
 [alias]
-  co = checkout
   st = status -sb
-  br = branch
-  ci = commit
-  fo = fetch origin
   d = !git --no-pager diff
   dt  = difftool
   stat = !git --no-pager diff --stat
@@ -56,4 +52,6 @@
 [commit]
 	gpgsign = true
 [interactive]
-    singleKey = true
+  singleKey = true
+[gpg]
+	program = gpg2
