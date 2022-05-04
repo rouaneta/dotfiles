@@ -37,15 +37,15 @@ if [ ! -d "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting" ]; then
 fi
 cd "$CURRENT_DIR"
 
-setopt nocasematch
-if [[ ! `uname` =~ "darwin" ]]; then
-  git config --global core.editor "subl -n -w $@ >/dev/null 2>&1"
-  echo 'export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"' >> zshrc
-else
-  # git config --global core.editor "'/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code' -n -w"
-  git config --global core.editor "vim"
-  bundler_editor="'/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code'"
-  echo "export BUNDLER_EDITOR=\"${bundler_editor} -a\"" >> zshrc
-fi
+# setopt nocasematch
+# if [[ ! `uname` =~ "darwin" ]]; then
+#   git config --global core.editor "subl -n -w $@ >/dev/null 2>&1"
+#   echo 'export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"' >> zshrc
+# else
+#   # git config --global core.editor "'/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code' -n -w"
+#   git config --global core.editor "vim"
+#   bundler_editor="'/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code'"
+#   echo "export BUNDLER_EDITOR=\"${bundler_editor} -a\"" >> zshrc
+# fi
 
-zsh ~/.zshrc
+# zsh ~/.zshrc
